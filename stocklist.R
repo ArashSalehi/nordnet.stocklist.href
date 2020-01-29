@@ -2,8 +2,8 @@
 # Information ---------------------------------------------------------------------------------
 
 # Create a data frame with the stock names and href from "Nordnet Aktielista".
-# You have to choose the list that you want to get. 
-# Then you copy the url in to fullurl below.
+# You have to choose the list that you want to get From Nordnet stocklist. 
+# Then you copy the url and insert it when you are prompt.
 
 
 # Load Packages Needed ------------------------------------------------------------------------
@@ -15,7 +15,7 @@ inst = lapply(pkgs, library, character.only = TRUE) 	        	# load them
 # Webscrape Initial Information ---------------------------------------------------------------
 
 # Full list of swedish Urls
-fullurl = "https://www.nordnet.se/marknaden/aktiekurser?exchangeList=se%3Alargecapstockholmsek&exchangeList=se%3Amidcapstockholmsek&exchangeList=se%3Asmallcapstockholmsek&exchangeList=se%3Afirstnorthsto&exchangeList=se%3Afirstnorthpremierstockholmsek&exchangeList=se%3Angm&exchangeList=se%3Aspse"
+fullurl = readline(prompt = "Enter full url: ")
 urlparts = unlist(strsplit(fullurl,"[?&]",fixed = FALSE))
 urlparts = urlparts[2:length(urlparts)]
 
@@ -78,5 +78,6 @@ for ( k in 1:nrow(market2)) {
   dftotal = cbind(Names,Href,Time,Country_Code,List)
   df1 = rbind(df1,dftotal)
 }
+
 stocklist = data.frame(lapply(df1, as.character), stringsAsFactors=FALSE) # Turn Factor Into Char
 
